@@ -23,17 +23,4 @@ public class GoSettings {
     public String configDir() {
         return configDir;
     }
-
-    public class CommaSeparatedConverter implements IStringConverter<List<Integer>> {
-        @Override
-        public List<Integer> convert(String value) {
-            String[] split = value.split(",");
-            ArrayList<Integer> result = new ArrayList<>();
-            for (String s : split) {
-                result.add(Integer.parseInt(s));
-            }
-            return result;
-        }
-
-    }
 }
