@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="91">
+  <server artifactsdir="artifacts" agentAutoRegisterKey="041b5c7e-dab2-11e5-a908-13f95f3c6ef6" commandRepositoryLocation="default" serverId="dev-id">
+    <security xmlns:uuid="xalan://java.util.UUID">
+      
+      <passwordFile path="/etc/go/password.properties"/>
+      <roles>
+        <role name="xyz"/>
+        <role name="role1">
+          <users>
+            <user>foo</user>
+          </users>
+        </role>
+      </roles>
+      <admins>
+        <user>admin</user>
+      </admins>
+    <authConfigs><authConfig id="3abee665-85e3-4017-8de6-199e59cf9b87" pluginId="cd.go.authentication.ldap"><property><key>Url</key><value>ldap://ldap-server</value></property><property><key>ManagerDN</key><value>manager_dn</value></property><property><key>SearchBases</key><value>ou=ou1
+ou=ou2
+</value></property><property><key>UserLoginFilter</key><value>(sAMAccountName={0})</value></property><property><key>Password</key><value>secret</value></property></authConfig></authConfigs></security>
+  </server>
+  <pipelines group="first">
+    <pipeline name="up42">
+      <materials>
+        <git url="/Users/jsingh/gitrepo"/>
+      </materials>
+      <stage name="up42_stage">
+        <jobs>
+          <job name="up42_job">
+            <tasks>
+              <exec command="ls"/>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+  </pipelines>
+</cruise>

@@ -1,0 +1,54 @@
+apply plugin: 'java'
+
+repositories {
+    jcenter()
+    maven { url "https://dl.bintray.com/gocd-maven-repo/generic/gocd" }
+}
+description = 'GoCD tool to rescue from config migration failure'
+
+configurations {
+    extractedAtTopLevel { transitive false }
+    fatJarConfig
+    archivePath
+}
+
+dependencies {
+    compile gradleApi()
+    compile group: 'com.beust', name: 'jcommander', version: '1.70'
+    compile group: 'org.jdom', name: 'jdom2', version: '2.0.6'
+    compile group: 'commons-io', name: 'commons-io', version: '2.5'
+    compile group: 'jaxen', name: 'jaxen', version: '1.2.0-atlassian-2'
+    testCompile 'junit:junit:4.12'
+    extractedAtTopLevel group: 'one-jar', name: 'boot', version: '0.96'
+}
+
+jar {
+    classifier 'classes'
+}
+
+task fatJar(type: Jar, dependsOn: [':jar']) {
+    manifest {
+        attributes 'Main-Class': 'com.simontuffs.onejar.Boot'
+        attributes 'One-Jar-Main-Class': 'com.thoughtworks.go.LdapAndPasswordFileMigration'
+    }
+
+    doFirst {
+        from(configurations.compile) {
+            into "lib/"
+        }
+
+        from(jar.archivePath) {
+            into('main/')
+        }
+
+        with(copySpec {
+            from { configurations.extractedAtTopLevel.collect { it.isDirectory() ? it : zipTree(it) } }
+            include '**/*.class'
+            exclude 'OneJar.class'
+            into("/")
+        })
+    }
+}
+
+
+
