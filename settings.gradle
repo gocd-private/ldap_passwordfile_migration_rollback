@@ -15,4 +15,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'rescue_from_migration_failure'
+rootProject.name = 'ldap_passwordfile_migration_rollback'
