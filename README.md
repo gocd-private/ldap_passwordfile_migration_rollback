@@ -28,15 +28,15 @@ Run the following command:
 ```      
 
 Upon a successful rollback, a new file `rescued-cruise-config.xml` would be created in the `-configDir` folder. This is the file you need to set up as your config.
-Copy the file to machine running Go-server
-Stop Go-server
-Copy `rescued-cruise-config.xml` to /etc/go/
-cd `etc/go/`
-Rename cruise-config.xml to cruise-config.xml.bak
-Rename `rescued-cruise-config.xml` to `cruise-config.xml`
-Add a JVM arg to Go-server start up script: `-Dgo.security.inbuilt.auth.enabled=Y`. For linux: edit /etc/default/go-server, For Windows: edit C:\program files (x86)\Go Server\config\wrapper-properties.conf
-Start the server.
-Check logs to make sure there are no errors
-Once the server is up, try logging in. If that works - cool. 
-Now check http://<go-server:8153>/go/admin/config/server to ensure that you see the LDAP and PasswordFile settings in that page.
-Once you have done this (if possible before rolling back) plesse  write to [go-cd mailing list](https://groups.google.com/forum/#!forum/go-cd) or on the [Gitter channel](https://gitter.im/gocd/gocd) to report the issue with a description of why did you have to rollback as that would help us make the fix in the application. 
+* Copy the file to machine running Go-server
+* Stop Go-server
+* Copy `rescued-cruise-config.xml` to /etc/go/
+* cd `etc/go/`
+* Rename cruise-config.xml to cruise-config.xml.bak
+* Rename `rescued-cruise-config.xml` to `cruise-config.xml`
+* Add a JVM arg to Go-server start up script: `-Dgo.security.inbuilt.auth.enabled=Y`. For linux: edit /etc/default/go-server, For Windows: edit C:\program files (x86)\Go Server\config\wrapper-properties.conf
+* Start the server.
+* Check logs to make sure there are no errors
+* Once the server is up, try logging in. If that works - cool. 
+* Now check http://<go-server:8153>/go/admin/config/server to ensure that you see the LDAP and PasswordFile settings in that page.
+* Once you have done this (if possible before rolling back) plesse  write to [go-cd mailing list](https://groups.google.com/forum/#!forum/go-cd) or on the [Gitter channel](https://gitter.im/gocd/gocd) to report the issue with a description of why did you have to rollback as that would help us make the fix in the application. 
